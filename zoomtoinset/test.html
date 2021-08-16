@@ -1,0 +1,155 @@
+<div id="openseadragon1" style="width:800px; height:600px;"></div>
+
+
+<!-- div class="zoom">
+<img src="default.jpg" id="image" width="800" usemap="#image-map" class="zoom">
+<map name="image-map">
+    <area onclick = "zoomin();" id="inset1" alt="" title="" href="" coords="90,90,35" shape="circle">
+</map>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="image-zoom.min.js"></script>
+<link rel="stylesheet" href="image-zoom.css" / -->
+<script src="openseadragon/openseadragon.js"></script>
+<script src="OpenSeadragonHTMLelements.js"></script>
+<script>
+var viewer = OpenSeadragon({
+  id:"openseadragon1",
+  preserveViewport: true,
+  prefixUrl: "openseadragon/images/",
+  defaultZoomLevel: 1,
+  sequenceMode: true,
+  tileSources:[
+  {"@context":"http://iiif.io/api/image/2/context.json","@id":"https://iiif.universiteitleiden.nl/iiif/2/hdl:1887.1%252Fitem:2011557","protocol":"http://iiif.io/api/image","width":12709,"height":7909,"sizes":[{"width":199,"height":124},{"width":397,"height":247},{"width":794,"height":494},{"width":1589,"height":989},{"width":3177,"height":1977},{"width":6355,"height":3955}],"tiles":[{"width":512,"height":512,"scaleFactors":[1,2,4,8,16,32,64]}],"profile":["http://iiif.io/api/image/2/level2.json",{"formats":["jpg","tif","gif","png"],"maxArea":100000000,"qualities":["bitonal","default","gray","color"],"supports":["regionByPx","sizeByW","sizeByWhListed","cors","regionSquare","sizeByDistortedWh","canonicalLinkHeader","sizeByConfinedWh","sizeByPct","jsonldMediaType","regionByPct","rotationArbitrary","sizeByH","baseUriRedirect","rotationBy90s","profileLinkHeader","sizeByForcedWh","sizeByWh","mirroring"]}]},
+] 
+});
+
+
+var container1 = document.createElement("div")
+container1.id = "container1";
+container1.width = 2000;
+container1.height = 1000;
+container1.style.display = "block";
+var marker1 = document.createElement("div")
+marker1.id = "marker1";
+marker1.width = 1000;
+marker1.height = 1000;
+var text1 = document.createElement("div");
+text1.id = "text1";
+text1.innerHTML = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+text1.style.display = "none";
+container1.appendChild(marker1);
+container1.appendChild(text1);
+marker1.className = 'rim1'
+marker1.onclick = function() {
+ hEl.goToElementLocation("inset1", false)
+ 
+/*viewer1.viewport.fitBoundsWithConstraints(                                                                                                                              
+new OpenSeadragon.Rect(
+1000,                                                                                                                                               
+1000,                                                                                                                                              
+2000,                                                                                                                                                             
+1000                                                                                                                                                          
+ )
+)*/
+  document.getElementById("marker1").style.display = "none";
+  document.getElementById("text1").style.display = "inline-block";
+}
+var myElement1 = document.createElement("div")
+myElement1.className = 'rim1'
+myElement1.onclick = function() {
+ hEl.goToElementLocation("inset2", false)
+ 
+}
+
+
+var myElement2 = document.createElement("div")
+myElement2.className = 'rim1'
+myElement2.onclick = function() {
+ hEl.goToElementLocation("inset3", false)
+ 
+}
+
+
+
+var hEl = viewer.HTMLelements();
+hEl.addElement({id:"inset1",
+                element: container1,
+                x:800,
+                y:700,
+                width: 1000,
+                height:1000,
+               });
+hEl.addElement({id:"inset2",
+                element: myElement1,
+                x:1100,
+                y:5500,
+                width: 1000,
+                height:1000,
+               });
+
+hEl.addElement({id:"inset3",
+                element: myElement2,
+                x:3500,
+                y:6200,
+                width: 1000,
+                height:1000,
+               });
+
+
+
+/*var areas = document.getElementsByTagName( 'area' );
+for( var index = 0; index < areas.length; index++ ) {    
+    areas[index].addEventListener( 'mouseover', function () {this.focus();}, false );
+    areas[index].addEventListener( 'mouseout', function () {this.blur();}, false );
+};
+
+$(function(){
+
+  $('#image').imageZoom({zoom: 500});
+
+});*/
+
+</script>
+
+<style>
+.rim1, .rim2, .rim3{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  border-radius: 50%;
+  width: 0em;
+  height: 0em;
+  border: white .1em solid;
+  background-color: rgba(63,178,191,0.3);
+}
+div.rim1:hover {
+  -webkit-animation: expand 2s linear infinite;
+}
+.rim2 {
+  -webkit-animation: expand 2s linear .5s infinite;
+}
+.rim3 {
+  -webkit-animation: expand 2s linear 1s infinite;
+}
+
+@-webkit-keyframes expand {
+  0% {
+    top: calc(50% - .5em);
+    left: calc(50% - .5em);
+    width: 1em;
+    height: 1em;
+    border: white .25em solid;
+    opacity: 1;
+  }
+  100% {
+    top: calc(50% - 5.5em);
+    left: calc(50% - 5.5em);
+    width: 11em;
+    height: 11em;
+    border: white .5em solid;
+    opacity: 0;
+  }
+}
+</style>
